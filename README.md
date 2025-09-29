@@ -3,7 +3,8 @@
 📈 Simulador financeiro para calcular investimentos.
 
 ## Como utilizar?
->[!WARNING] Será necessário ter Python instalado na sua máquina.
+> [!WARNING]
+> Será necessário ter Python instalado na sua máquina.
 
 ### Linux
 ```bash
