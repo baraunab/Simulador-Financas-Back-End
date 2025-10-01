@@ -58,6 +58,7 @@ MESES = 6                   # aproximação  180 dias
 ALIQ_IRPF = 0.225           # 22,5% (até 180 dias)
 IOF_VALOR = 0.0             # >30 dias => IOF zero
 
+# TODO: Fazer bugfixing e teste unitario
 def simular_mensal(valor_inicial: float, aporte_mensal: float, taxa_mensal: float, n_meses: int):
     """
     Juros compostos mensais com aporte no fim de cada mês.
