@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional, Literal
 from datetime import datetime, date, timedelta
+from fastapi.middleware.cors import CORSMiddleware
 
 class SimulacaoInput(BaseModel):
     produto: Optional[str] = "Produto desconhecido"
@@ -100,6 +101,19 @@ def taxa_anual_produto(produto: Literal, cdi_aa: Optional[float], selic_aa: Opti
 
 # instanciacao da biblioteca FastAPI
 app = FastAPI(title="Simulador Financeiro (180d fixo)", version="1.0.0")
+
+# configuracao do CORS
+origins = [
+    "http://127.0.0.1:8080"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # routing pro endereco raiz
 @app.get("/")
