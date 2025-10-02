@@ -12,9 +12,9 @@ class SimulacaoInput(BaseModel):
     data_inicio: date
 
     # Referências pro usuario decidir na hora oq ele quer 
-    cdi_aa: Optional[float] = 0       # CDI ao ano (ex.: 0.135 = 13,5% a.a.)
-    selic_aa: Optional[float] = 0     # SELIC ao ano (ex.: 0.1325 = 13,25% a.a.)
-    prefixado_aa: Optional[float] = 0 # Taxa prefixada ao ano (ex.: 0.118 = 11,8% a.a.)
+    cdi_aa: Optional[float] = None       # CDI ao ano (ex.: 0.135 = 13,5% a.a.)
+    selic_aa: Optional[float] = None     # SELIC ao ano (ex.: 0.1325 = 13,25% a.a.)
+    prefixado_aa: Optional[float] = None # Taxa prefixada ao ano (ex.: 0.118 = 11,8% a.a.)
 
 class SimulacaoOutput(BaseModel):
     produto: str
