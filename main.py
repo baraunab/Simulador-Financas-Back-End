@@ -12,9 +12,9 @@ class SimulacaoInput(BaseModel):
     data_inicio: date
 
     # Referências pro usuario decidir na hora oq ele quer 
-    cdi_aa: Optional[float] = 0       # CDI ao ano (ex.: 0.135 = 13,5% a.a.)
-    selic_aa: Optional[float] = 0     # SELIC ao ano (ex.: 0.1325 = 13,25% a.a.)
-    prefixado_aa: Optional[float] = 0 # Taxa prefixada ao ano (ex.: 0.118 = 11,8% a.a.)
+    cdi_aa: Optional[float] = 0.135        # CDI ao ano (ex.: 0.135 = 13,5% a.a.)
+    selic_aa: Optional[float] = 0.1325     # SELIC ao ano (ex.: 0.1325 = 13,25% a.a.)
+    prefixado_aa: Optional[float] = 0.118  # Taxa prefixada ao ano (ex.: 0.118 = 11,8% a.a.)
 
 class SimulacaoOutput(BaseModel):
     produto: str
@@ -80,8 +80,6 @@ def taxa_mensal_equivalente(taxa_aa: float) -> float:
 
 def taxa_anual_produto(produto: Literal, cdi_aa: Optional[float], selic_aa: Optional[float], pref_aa: Optional[float]) -> float:
     if produto.startswith("CDB_"):
-        if cdi_aa is None:
-            raise ValueError("Informe cdi_aa para simular CDB.")
         mult = {
             "CDB_102": 1.02, "CDB_104": 1.04,
             "CDB_106": 1.06, "CDB_108": 1.08
@@ -101,11 +99,9 @@ def taxa_anual_produto(produto: Literal, cdi_aa: Optional[float], selic_aa: Opti
 # instanciacao da biblioteca FastAPI
 app = FastAPI(title="Simulador Financeiro (180d fixo)", version="1.0.0")
 
-origins = ["*"]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
